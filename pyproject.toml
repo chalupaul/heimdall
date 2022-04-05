@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "heimdall"
+version = "0.1.0"
+description = ""
+authors = ["chalupaul <me@chalupaul.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.75.1"
+mangum = "^0.14.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+aws-cdk-lib = "^2.18.0"
+uvicorn = "^0.17.6"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
