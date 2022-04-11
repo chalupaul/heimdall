@@ -3,26 +3,16 @@ import os
 
 import aws_cdk
 
-from cdk.pipelines import HeimdallPipeline
+from cdk.api import Api
+from cdk.layers import Layers
+
+from cdk.pipelines import Pipelines
 
 
 app = aws_cdk.App()
-HeimdallPipeline(app, "HeimdallPipeline",
-    # If you don't specify 'env', this stack will be environment-agnostic.
-    # Account/Region-dependent features and context lookups will not work,
-    # but a single synthesized template can be deployed anywhere.
+#layers = Layers(app, "LambdaLayers")
+#Api(app, "API", layers=layers.api_layers)
 
-    # Uncomment the next line to specialize this stack for the AWS Account
-    # and Region that are implied by the current CLI configuration.
-
-    #env=cdk.Environment(account=os.getenv('CDK_DEFAULT_ACCOUNT'), region=os.getenv('CDK_DEFAULT_REGION')),
-
-    # Uncomment the next line if you know exactly what Account and Region you
-    # want to deploy the stack to. */
-
-    #env=cdk.Environment(account='123456789012', region='us-east-1'),
-
-    # For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html
-    )
+pipelines = Pipelines(app, "heimdall-pipelines")
 
 app.synth()

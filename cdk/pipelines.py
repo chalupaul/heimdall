@@ -1,24 +1,36 @@
 from constructs import Construct
 from aws_cdk import (
     Stack,
+    aws_codecommit as codecommit,
     pipelines
 )
 
-class HeimdallPipeline(Stack):
+class Pipelines(Stack):
     def __init__(self, scope: Construct, id: str, **kwargs) -> None:
-        super().__init__(scope, id, **kwargs)
-        repo = None,
-        pipeline = pipelines.CodePipeline(
+        super().__init__(scope,id,**kwargs)
+
+        connection_arn = ("arn:aws:codestar-connections:"
+            "us-west-2:"
+            "905590892698:"
+            "connection/ae670e38-6cab-4613-8444-0a860aa06dcb"
+        )
+
+        repo = pipelines.CodePipelineSource.connection("chalupaul/heimdall", 
+            "main",
+            connection_arn=connection_arn
+        )
+
+        synth_step = pipelines.ShellStep(
+            "Synth",
+            input=repo,
+            commands = [
+                "pip install poetry",
+                "poetry install",
+                "ls .venv"
+            ]
+        )
+        self.pipeline = pipelines.CodePipeline(
             self,
-            "Pipeline",
-            synth=pipelines.ShellStep(
-                "Synth",
-                #input=pipelines.CodePipelineSource.connection # TODO: make this work
-                input=pipelines.CodePipelineSource.code_commit(repo, "master"),
-                commands=[
-                    "npm install -g aws-cdk",  # Installs the cdk cli on Codebuild
-                    "pip install -r requirements.txt",  # Instructs Codebuild to install required packages
-                    "npx cdk synth",
-                ]
-            ),
+            "Deploy Main",
+            synth=synth_step
         )
