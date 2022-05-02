@@ -26,10 +26,11 @@ class Pipelines(Stack):
             commands = [
                 "pip install poetry",
                 "poetry install",
-                "ls .",
-                "pwd"
+                "npm install -g aws-cdk",
+                "poetry run task cdksynth"
             ]
         )
+
         self.pipeline = pipelines.CodePipeline(
             self,
             "Deploy Main",
