@@ -10,7 +10,7 @@ from aws_cdk import (
 )
 from constructs import Construct
 
-from cdk.lib import paths
+from cdk.common import paths
 
 class Api(Stack):
 
