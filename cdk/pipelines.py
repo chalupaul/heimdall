@@ -26,7 +26,9 @@ class Pipelines(Stack):
             commands = [
                 "pip install poetry",
                 "poetry install",
-                "ls .venv"
+                "ls .venv",
+                "ls .",
+                "pwd"
             ]
         )
         self.pipeline = pipelines.CodePipeline(
