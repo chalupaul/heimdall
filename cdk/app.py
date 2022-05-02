@@ -3,10 +3,10 @@ import os
 
 import aws_cdk
 
-from heimdall_cdk.api import Api
-from heimdall_cdk.layers import Layers
+from cdk.api import Api
+from cdk.layers import Layers
 
-from heimdall_cdk.pipelines import Pipelines
+from cdk.pipelines import Pipelines
 
 
 app = aws_cdk.App()
