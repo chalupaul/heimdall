@@ -27,6 +27,8 @@ class Pipelines(Stack):
                 "pip install poetry",
                 "poetry install",
                 "npm install -g aws-cdk",
+                "pwd",
+                "ls",
                 "poetry run task cdksynth"
             ]
         )

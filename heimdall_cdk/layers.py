@@ -7,7 +7,7 @@ from typing import Sequence
 
 from constructs import Construct
 
-from cdk.lib import paths
+from heimdall_cdk.lib import paths
 
 class Layers(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
