@@ -1,5 +1,5 @@
 {
-  "app": "python cdk/app.py",
+  "app": "python heimdall_cdk/app.py",
   "watch": {
     "include": [
       "**"
