@@ -46,7 +46,9 @@ class Pipelines(Stack):
                 "version": "0.2",
                 "cache": {
                     "paths": [
-                        ".venv"
+                        ".venv",
+                        "/root/.pyenv",
+                        "/root/.cache"
                     ]
                 }
             })
@@ -55,6 +57,8 @@ class Pipelines(Stack):
             "Synth",
             input=repo,
             commands = [
+                "ls -la",
+                "ls -la $HOME",
                 "pip install poetry",
                 "poetry install",
                 "npm install -g aws-cdk",
@@ -62,7 +66,7 @@ class Pipelines(Stack):
                 "ls -la",
                 "poetry env list --full-path",
                 "poetry run task cdksynth",
-                "echo $HOME",
+                "echo MY HOME IS $HOME",
                 "ls -la $HOME"
             ]
         )
