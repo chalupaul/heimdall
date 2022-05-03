@@ -24,6 +24,7 @@ class Pipelines(Stack):
             "Synth",
             input=repo,
             commands = [
+                "ls -la",
                 "pip install poetry",
                 "poetry install",
                 "npm install -g aws-cdk",
@@ -37,5 +38,6 @@ class Pipelines(Stack):
         self.pipeline = pipelines.CodePipeline(
             self,
             "Deploy Main",
+            self_mutation=True,
             synth=synth_step
         )
