@@ -1,4 +1,0 @@
-# selection from poetry export -f requirements.txt
-aws-cdk-lib==2.18.0; python_version >= "3.6" \
-    --hash=sha256:60f1c68685e397a855d1f752d4d8006eddf24e0f26761953e3e9bf3edc63d747 \
-    --hash=sha256:6d5d147d226280773c1ae234a762c865d0d096a73650c9e0190274cfac245312

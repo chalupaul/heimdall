@@ -1,13 +1,34 @@
 from constructs import Construct
 from aws_cdk import (
     Stack,
-    aws_codecommit as codecommit,
-    pipelines
+    aws_kms,
+    aws_s3,
+    pipelines,
+    RemovalPolicy,
+    Duration,
+    aws_codebuild
 )
 
 class Pipelines(Stack):
     def __init__(self, scope: Construct, id: str, **kwargs) -> None:
         super().__init__(scope,id,**kwargs)
+        key_arn = ("arn:aws:kms:"
+            "us-west-2:905590892698:key/"
+            "53db5ecd-5b1f-4b44-ad6e-b6016288f699")
+        s3_key = aws_kms.Alias.from_key_arn(self, 'S3Key', key_arn)
+
+        lifecycle_rule = aws_s3.LifecycleRule(
+            abort_incomplete_multipart_upload_after=Duration.minutes(30),
+            expiration=Duration.days(30)
+        )
+        cache_bucket = aws_s3.Bucket(self, "buildcache",
+            auto_delete_objects=True,
+            removal_policy=RemovalPolicy.DESTROY,
+            bucket_key_enabled=True,
+            encryption_key=s3_key,
+            enforce_ssl=True,
+            lifecycle_rules=[lifecycle_rule]
+            )
 
         connection_arn = ("arn:aws:codestar-connections:"
             "us-west-2:"
@@ -20,6 +41,16 @@ class Pipelines(Stack):
             connection_arn=connection_arn
         )
 
+        codebuild_defaults = pipelines.CodeBuildOptions(
+            partial_build_spec=aws_codebuild.BuildSpec.from_object({
+                "version": "0.2",
+                "cache": {
+                    "paths": [
+                        ".venv"
+                    ]
+                }
+            })
+        )
         synth_step = pipelines.ShellStep(
             "Synth",
             input=repo,
@@ -42,5 +73,6 @@ class Pipelines(Stack):
             self,
             "Deploy Main",
             self_mutation=True,
-            synth=synth_step
+            synth=synth_step,
+            code_build_defaults=codebuild_defaults
         )
