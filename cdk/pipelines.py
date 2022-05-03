@@ -55,17 +55,13 @@ class Pipelines(Stack):
             "Synth",
             input=repo,
             commands = [
-                "pip install -r cdk/requirements.txt",
+                "pip install poetry",
+                "poetry install",
                 "npm install -g aws-cdk",
-                "cdk synth"
-                #"ls -la",
-                #"pip install poetry",
-                #"poetry install",
-                #"npm install -g aws-cdk",
-                #"pwd",
-                #"ls",
-                #"poetry env list --full-path",
-                #"poetry run task cdksynth"
+                "pwd",
+                "ls -la",
+                "poetry env list --full-path",
+                "poetry run task cdksynth"
             ]
         )
 
