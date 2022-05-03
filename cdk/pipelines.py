@@ -15,10 +15,10 @@ class Pipelines(Stack):
         key_arn = ("arn:aws:kms:"
             "us-west-2:905590892698:key/"
             "53db5ecd-5b1f-4b44-ad6e-b6016288f699")
-        s3_key = aws_kms.Alias.from_key_arn(self, 'S3Key', key_arn)
+        s3_key = aws_kms.Key.from_key_arn(self, 'S3Key', key_arn)
 
         lifecycle_rule = aws_s3.LifecycleRule(
-            abort_incomplete_multipart_upload_after=Duration.minutes(30),
+            abort_incomplete_multipart_upload_after=Duration.days(1),
             expiration=Duration.days(30)
         )
         cache_bucket = aws_s3.Bucket(self, "buildcache",
