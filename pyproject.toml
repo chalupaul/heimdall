@@ -24,4 +24,4 @@ deps = "cdk.common.util:build_deps"
 
 [tool.taskipy.tasks]
 cdksynth = "cdk synth"
-cdkdeploy = "cdk deploy"
+cdkdeploy = "cdk deploy --require-approval never"

@@ -61,7 +61,9 @@ class Pipelines(Stack):
                 "pwd",
                 "ls -la",
                 "poetry env list --full-path",
-                "poetry run task cdksynth"
+                "poetry run task cdksynth",
+                "echo $HOME",
+                "ls -la $HOME"
             ]
         )
 
