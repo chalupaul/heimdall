@@ -13,7 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Poetry
-        uses: actions/cache@v2
         run: pipx install poetry
       - run: which poetry
       - run: pipx list
