@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: 3.9
-          cache: 'poetry'
+          cache: ['pip', 'poetry']
       - run: poetry install
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@master
