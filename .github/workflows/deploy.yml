@@ -16,7 +16,7 @@ jobs:
         run: pipx install poetry
       - run: which poetry
       - run: pipx list
-      - run: ls -la /opt/pipx/venvs/poetry
+      - run: cat /opt/pipx/venvs/poetry/pipx_metadata.json
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
