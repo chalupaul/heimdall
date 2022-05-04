@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: ls -la $HOME
       - name: Install Poetry
         run: pipx install poetry
       - run: which poetry
       - run: pipx list
+      - run: ls -la /opt/pipx/venvs
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
