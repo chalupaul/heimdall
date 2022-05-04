@@ -18,7 +18,9 @@ jobs:
         uses: actions/cache@v2
         id: cache-poetry-venv
         with:
-          path: /opt/pipx/venvs/poetry/
+          path: |
+            /opt/pipx/venvs/poetry/
+            /opt/pipx_bin/poetry
           key: ${{ runner.os }}-poetry-${{ env.poetry_version }}
           restore-keys: ${{ runner.os}}-poetry-
       - name: Install Poetry
