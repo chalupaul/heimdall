@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+      - main
+env:
+  poetry_version: "1.1.12"
+
+jobs:
+  build:
+    name: build
+    permissions:
+      id-token: write
+      contents: write
+    runs-on: ubuntu-latest
+      - uses: actions/checkout@v3
+      - uses: ./.github/workflows/poetry.yml
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@master
+        with:
+          aws-region: us-west-2
+          role-to-assume: arn:aws:iam::905590892698:role/gha-oidc
+          role-session-name: ${{ github.sha }}
