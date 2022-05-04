@@ -11,10 +11,18 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+          cache: 'poetry'
+      - run: poetry install
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@master
         with:
           aws-region: us-west-2
           role-to-assume: arn:aws:iam::905590892698:role/gha-oidc
           role-session-name: ${{ github.sha }}
-      - run: aws sts get-caller-identity
+      - name: Bootstrap Poetry
+        uses: actions/setup-python
