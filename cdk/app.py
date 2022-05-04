@@ -10,9 +10,9 @@ from cdk.pipelines import Pipelines
 
 
 app = aws_cdk.App()
-#layers = Layers(app, "LambdaLayers")
-#Api(app, "API", layers=layers.api_layers)
+layers = Layers(app, "Heimdall-LambdaLayers")
+Api(app, "Heimdall-API", layers=layers.api_layers)
 
-pipelines = Pipelines(app, "heimdall-pipelines")
+#pipelines = Pipelines(app, "heimdall-pipelines")
 
 app.synth()

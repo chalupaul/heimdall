@@ -130,3 +130,6 @@ dmypy.json
 
 # CDK stuff
 /cdk.out/
+
+# Task db
+.doit.db.*

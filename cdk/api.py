@@ -26,11 +26,11 @@ class Api(Stack):
         # )
 
         
-        signer_profile = signer.SigningProfile(self, "Signer Profile",
+        signer_profile = signer.SigningProfile(self, "HeimdallSP",
             platform=signer.Platform.AWS_LAMBDA_SHA384_ECDSA
         )
 
-        code_signing_config = lambda_.CodeSigningConfig(self, "Code Signing Config",
+        code_signing_config = lambda_.CodeSigningConfig(self, "HeimballCSC",
             signing_profiles=[signer_profile]
         )
 
