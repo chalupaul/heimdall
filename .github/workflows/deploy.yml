@@ -12,13 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: ls -la $HOME
       - name: Install Poetry
         run: pipx install poetry
+      - run: which poetry
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
           python-version: 3.9
-          cache: ['pip', 'poetry']
+          cache: 'poetry'
       - run: poetry install
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@master
