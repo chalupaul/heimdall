@@ -16,5 +16,5 @@ jobs:
         with:
           aws-region: us-west-2
           role-to-assume: arn:aws:iam::905590892698:role/gha-oidc
-          role-session-name: ${{ github.ref }}
+          role-session-name: ${{ github.ref_name }}
       - run: aws sts get-caller-identity
