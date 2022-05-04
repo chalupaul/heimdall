@@ -24,5 +24,3 @@ jobs:
           aws-region: us-west-2
           role-to-assume: arn:aws:iam::905590892698:role/gha-oidc
           role-session-name: ${{ github.sha }}
-      - name: Bootstrap Poetry
-        uses: actions/setup-python
