@@ -2,7 +2,7 @@ import os
 import paths
 
 
-req_path = os.path.join(paths.layer_dir, "requirements.txt")
+req_path = os.path.join(paths.pip_target_dir, "requirements.txt")
 
 def task_build_layers():
 
@@ -12,8 +12,8 @@ def task_build_layers():
         return ""
 
     def check_path():
-        if not os.path.exists(paths.layer_dir):
-            os.makedirs(paths.layer_dir)
+        if not os.path.exists(paths.pip_target_dir):
+            os.makedirs(paths.pip_target_dir)
 
     def clean_req_file():
         if os.path.exists(req_path):
@@ -26,7 +26,7 @@ def task_build_layers():
         return f"poetry export -o {req_path}"
     
     def install_libs():
-        return f"pip install -r {req_path} --upgrade -t {paths.layer_dir}"
+        return f"pip install -r {req_path} --upgrade -t {paths.pip_target_dir}"
     
     return {
         "actions":[
