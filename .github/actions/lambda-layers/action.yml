@@ -16,3 +16,4 @@ runs:
       shell: bash
       if: steps.cache-layers.outputs.cache-hit != 'true'
     - run: ls -la ./build/lambda_layer
+      shell: bash
