@@ -49,3 +49,4 @@ jobs:
       - name: Build Lambda Layers
         run: poetry run task buildlayers
         if: steps.cache-build-dir.outputs.cache-hit != 'true'
+      - run: ls -la ./build/lambda_layer
