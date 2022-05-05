@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Configure AWS
-        uses: ././github/actions/configure-aws
+        uses: ./.github/actions/configure-aws
         with:
           aws_account: "905590892698"
           aws_region: "us-west-2"
