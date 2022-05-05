@@ -7,7 +7,6 @@ env:
 
 jobs:
   bootstrap:
-    runs-on: ubuntu-latest
     uses: chalupaul/heimdall/.github/workflows/poetry.yml@main
   build:
     needs: bootstrap
