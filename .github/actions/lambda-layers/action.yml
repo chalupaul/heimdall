@@ -9,8 +9,8 @@ runs:
       id: cache-layers
       with:
         path: ./build/lambda_layer
-        key: ${{ runner.os }}-lambda-layers-${{ hashFiles('poetry.lock') }}
-        restore-keys: ${{ runner.os }}-lambda-layers-${{ hashFiles('poetry.lock') }}
+        key: ${{ runner.os }}-lambda-layer-${{ hashFiles('poetry.lock') }}
+        restore-keys: ${{ runner.os }}-lambda-layer-${{ hashFiles('poetry.lock') }}
     - name: Build Lambda Layers
       run: poetry run task buildlayers
       shell: bash
