@@ -11,6 +11,7 @@ runs:
   steps:
     - uses: actions/cache@v2
       id: cache-poetry-venv
+      shell: bash
       with:
         path: |
           /opt/pipx/venvs/poetry/
@@ -20,9 +21,12 @@ runs:
           ${{ runner.os }}-poetry-${{ inputs.poetry_version }}
           ${{ runner.os}}-poetry-
     - run: pipx install poetry==${{ inputs.poetry_version }}
+      shell: bash
       if: steps.cache-poetry-venv.outputs.cache-hit != 'true'
     - uses: actions/setup-python@v3
+      shell: bash
       with:
         python-version: 3.9
         cache: 'poetry'
     - run: poetry install
+      shell: bash
