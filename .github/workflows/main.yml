@@ -12,21 +12,11 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: aws-actions/configure-aws-credentials@master
-        with:
-          aws-region: us-west-2
-          role-to-assume: arn:aws:iam::905590892698:role/gha-oidc
-          role-session-name: ${{ github.sha }}
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/bootstrap-poetry
-      - name: Check Lambda Layer Cache
-        uses: actions/cache@v2
-        id: cache-layers
-        with:
-          path: ./build/lambda_layer
-          key: ${{ runner.os }}-lambda-layer-${{ hashFiles('poetry.lock') }}
-          restore-keys: ${{ runner.os }}-lambda-layer-${{ hashFiles('poetry.lock') }}
+      - name: Configure AWS
+        uses: ././github/actions/configure-aws
+      - name: Bootstrap Poetry
+        uses: ./.github/actions/bootstrap-poetry
       - name: Build Lambda Layers
-        run: poetry run task buildlayers
-        if: steps.cache-layers.outputs.cache-hit != 'true'
-      - run: ls -la ./build/lambda_layer
+        uses: ./.github/actions/lambda-layers
+      

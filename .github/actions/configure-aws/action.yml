@@ -1,0 +1,24 @@
+name: "Configure AWS"
+description: "Connect with oidc to AWS"
+inputs:
+  aws_account:
+    description: "AWS Account number"
+    required: true
+  aws_region:
+    description: "AWS Region"
+    required: false
+    default: "us-east-1"
+  session_name:
+    description: "STS Session Name"
+    required: false
+    default: ${{ github.sha }}
+
+    
+runs:
+  using: "composite"
+  steps:
+    - uses: aws-actions/configure-aws-credentials@master
+      with:
+        aws-region: ${{ inputs.aws_region }}
+        role-to-assume: arn:aws:iam::${{ inputs.aws_account }}:role/gha-oidc
+        role-session-name: ${{ inputs.session_name }}
