@@ -6,7 +6,7 @@ env:
   poetry_version: "1.1.12"
 
 jobs:
-  build:
+  deploy:
     permissions:
       id-token: write
       contents: write
@@ -22,4 +22,6 @@ jobs:
         uses: ./.github/actions/bootstrap-poetry
       - name: Build Lambda Layers
         uses: ./.github/actions/lambda-layers
+      - name: CDK Build
+        run: poetry run task cdkdeploy
       
