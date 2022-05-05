@@ -39,13 +39,13 @@ jobs:
           aws-region: us-west-2
           role-to-assume: arn:aws:iam::905590892698:role/gha-oidc
           role-session-name: ${{ github.sha }}
-      - name: Check layer cache
+      - name: Check build cache
         uses: actions/cache@v2
-        id: cache-lambda-layers
+        id: cache-build-dir
         with:
-          path: ./build
+          path: ./build/
           key: ${{ runner.os }}-layer-${{ hashFiles('poetry.lock') }}
           restore-keys: ${{ runner.os }}-poetry-${{ inputs.poetry-version }}
       - name: Build Lambda Layers
         run: poetry run task buildlayers
-        if: steps.cache-lambda-layers.outputs.cache-hit != 'true'
+        if: steps.cache-build-dir.outputs.cache-hit != 'true'
