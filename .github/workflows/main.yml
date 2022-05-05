@@ -6,8 +6,10 @@ env:
   poetry_version: "1.1.12"
 
 jobs:
-  build:
+  bootstrap:
     uses: chalupaul/heimdall/.github/workflows/poetry.yml@main
+  build:
+    needs: bootstrap
     permissions:
       id-token: write
       contents: write
