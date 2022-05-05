@@ -16,21 +16,12 @@ class Api(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, layers: Sequence[aws_lambda.ILayerVersion] = [], **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
-
-        # The code that defines your stack goes here
-
-        # example resource
-        # queue = sqs.Queue(
-        #     self, "CdktustQueue",
-        #     visibility_timeout=Duration.seconds(300),
-        # )
-
         
         signer_profile = aws_signer.SigningProfile(self, "HeimdallSP",
             platform=aws_signer.Platform.AWS_LAMBDA_SHA384_ECDSA
         )
 
-        code_signing_config = aws_lambda.CodeSigningConfig(self, "HeimballCSC",
+        code_signing_config = aws_lambda.CodeSigningConfig(self, "HeimdallCSC",
             signing_profiles=[signer_profile]
         )
 
