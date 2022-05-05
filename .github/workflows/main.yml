@@ -7,7 +7,6 @@ env:
 
 jobs:
   build:
-    needs: bootstrap
     permissions:
       id-token: write
       contents: write
