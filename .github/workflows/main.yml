@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Poetry Cache
+      - name: Check Poetry Cache
         uses: actions/cache@v2
         id: cache-poetry-venv
         with:
@@ -30,6 +30,7 @@ jobs:
         with:
           python-version: 3.9
           cache: 'poetry'
+      - run: ls -la
       - run: poetry install
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@master
@@ -37,3 +38,4 @@ jobs:
           aws-region: us-west-2
           role-to-assume: arn:aws:iam::905590892698:role/gha-oidc
           role-session-name: ${{ github.sha }}
+      - run: ls -la
