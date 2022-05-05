@@ -7,13 +7,13 @@ env:
 
 jobs:
   build:
+    uses: chalupaul/heimdall/.github/workflows/poetry.yml@main
     permissions:
       id-token: write
       contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: chalupaul/heimdall/.github/workflows/poetry.yml@main
       - name: Check Lambda Layer Cache
         uses: actions/cache@v2
         id: cache-layers
