@@ -8,12 +8,10 @@ runs:
       uses: actions/cache@v2
       id: cache-layers
       with:
-        path: ./build/lambda_layer/
-        key: ${{ runner.os }}-lambda-lyr-${{ hashFiles('poetry.lock') }}
-        restore-keys: ${{ runner.os }}-lambda-lyr-${{ hashFiles('poetry.lock') }}
+        path: ./build/lambda_layers/
+        key: ${{ runner.os }}-lambdalayer-${{ hashFiles('poetry.lock') }}
+        restore-keys: ${{ runner.os }}-lambdalayer-${{ hashFiles('poetry.lock') }}
     - name: Build Lambda Layers
       run: poetry run task buildlayers
       shell: bash
       if: steps.cache-layers.outputs.cache-hit != 'true'
-    - run: ls -la ./build/lambda_layer
-      shell: bash
