@@ -6,8 +6,6 @@ import aws_cdk
 from cdk.api import Api
 from cdk.layers import Layers
 
-from cdk.pipelines import Pipelines
-
 
 app = aws_cdk.App()
 layers = Layers(app, "Heimdall-LambdaLayers")
