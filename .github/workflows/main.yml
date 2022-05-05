@@ -18,10 +18,12 @@ jobs:
         with:
           aws_account: "905590892698"
           aws_region: "us-west-2"
+      - name: Bootstrap CDK
+        uses: ./.github/actions/bootstrap-cdk
       - name: Bootstrap Poetry
         uses: ./.github/actions/bootstrap-poetry
       - name: Build Lambda Layers
         uses: ./.github/actions/lambda-layers
       - name: CDK Build
-        run: poetry run task cdkdeploy
+        run: npm list
       

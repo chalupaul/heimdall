@@ -1,0 +1,17 @@
+name: "Bootstrap CDK"
+description: "Install CDK"
+inputs:
+  node_version:
+    description: "version of node to install"
+    required: false
+    default: 14
+
+    
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node_version }}
+        cache: 'npm'
+    - run: npm install aws-cdk
