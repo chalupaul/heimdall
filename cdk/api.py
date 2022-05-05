@@ -4,8 +4,8 @@ from typing_extensions import runtime
 from aws_cdk import (
     # Duration,
     Stack,
-    aws_lambda as lambda_,
-    aws_signer as signer,
+    aws_lambda,
+    aws_signer,
     # aws_sqs as sqs,
 )
 from constructs import Construct
@@ -14,7 +14,7 @@ from cdk.common import paths
 
 class Api(Stack):
 
-    def __init__(self, scope: Construct, construct_id: str, layers: Sequence[lambda_.ILayerVersion] = [], **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, layers: Sequence[aws_lambda.ILayerVersion] = [], **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         # The code that defines your stack goes here
@@ -26,17 +26,17 @@ class Api(Stack):
         # )
 
         
-        signer_profile = signer.SigningProfile(self, "HeimdallSP",
-            platform=signer.Platform.AWS_LAMBDA_SHA384_ECDSA
+        signer_profile = aws_signer.SigningProfile(self, "HeimdallSP",
+            platform=aws_signer.Platform.AWS_LAMBDA_SHA384_ECDSA
         )
 
-        code_signing_config = lambda_.CodeSigningConfig(self, "HeimballCSC",
+        code_signing_config = aws_lambda.CodeSigningConfig(self, "HeimballCSC",
             signing_profiles=[signer_profile]
         )
 
-        api_root = lambda_.Function(self, "api root",
-            code=lambda_.Code.from_asset(paths.api_root),
-            runtime=lambda_.Runtime.PYTHON_3_9,
+        api_root = aws_lambda.Function(self, "api root",
+            code=aws_lambda.Code.from_asset(paths.api_root),
+            runtime=aws_lambda.Runtime.PYTHON_3_9,
             handler="app.handler",
             layers=layers,
             code_signing_config=code_signing_config

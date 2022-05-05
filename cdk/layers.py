@@ -1,6 +1,6 @@
 import os
 from aws_cdk import (
-    aws_lambda as lambda_,
+    aws_lambda,
     RemovalPolicy,
     Stack
 )
@@ -14,9 +14,9 @@ class Layers(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        api_layer = lambda_.LayerVersion(self, "Heimdall-API-Layer",
-            removal_policy=RemovalPolicy.DESTROY,
-            code=lambda_.Code.from_asset(paths.layer_dir),
-            compatible_runtimes=[lambda_.Runtime.PYTHON_3_9],
+        api_layer = aws_lambda.LayerVersion(self, "Heimdall-API-Layer",
+            removal_policy=RemovalPolicy.RETAIN,
+            code=aws_lambda.Code.from_asset(paths.layer_dir),
+            compatible_runtimes=[aws_lambda.Runtime.PYTHON_3_9],
         )
-        self.api_layers: Sequence[lambda_.ILayerVersion] = [api_layer]
+        self.api_layers: Sequence[aws_lambda.ILayerVersion] = [api_layer]
