@@ -15,7 +15,13 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
+      - uses: aws-actions/configure-aws-credentials@master
+        with:
+          aws-region: us-west-2
+          role-to-assume: arn:aws:iam::905590892698:role/gha-oidc
+          role-session-name: ${{ github.sha }}
       - uses: actions/checkout@v3
+      - uses: ./.github/actions/bootstrap-poetry
       - name: Check Lambda Layer Cache
         uses: actions/cache@v2
         id: cache-layers

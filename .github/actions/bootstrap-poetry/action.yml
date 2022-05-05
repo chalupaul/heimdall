@@ -1,0 +1,28 @@
+name: "Bootstrap Poetry"
+description: "Builds and caches python and poetry"
+inputs:
+  poetry_version:
+    description: "Semantic version of poetry to install"
+    required: false
+    default: "1.1.12"
+    
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/cache@v2
+      id: cache-poetry-venv
+      with:
+        path: |
+          /opt/pipx/venvs/poetry/
+          /opt/pipx_bin/poetry
+        key: ${{ runner.os }}-poetry-${{ inputs.poetry_version }}
+        restore-keys: |
+          ${{ runner.os }}-poetry-${{ inputs.poetry_version }}
+          ${{ runner.os}}-poetry-
+    - run: pipx install poetry==${{ inputs.poetry_version }}
+      if: steps.cache-poetry-venv.outputs.cache-hit != 'true'
+    - uses: actions/setup-python@v3
+      with:
+        python-version: 3.9
+        cache: 'poetry'
+    - run: poetry install
