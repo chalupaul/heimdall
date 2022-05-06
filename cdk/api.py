@@ -35,7 +35,8 @@ class Api(NestedStack):
 
         #encryption_config = aws_lambda.e
         env_vars = {
-           "foo": "bar"
+           "LOG_LEVEL": "INFO",
+           "POWERTOOLS_SERVICE_NAME": "heimdall-api"
         }
 
         api_root = aws_lambda.Function(
