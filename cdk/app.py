@@ -16,8 +16,8 @@ class MainStack(Stack):
     def __init__(self, scope):
         super().__init__(scope, "Heimdall")
 
-        layers = Layers(scope, "Heimdall-LambdaLayers")
-        api = Api(scope, "Heimdall-API", layers=layers.layers)
+        layers = Layers(self, "Heimdall-LambdaLayers")
+        api = Api(self, "Heimdall-API", layers=layers.layers)
 
 #pipelines = Pipelines(app, "heimdall-pipelines")
 
