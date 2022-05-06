@@ -11,6 +11,7 @@ from cdk.layers import Layers
 
 
 
+app = App()
 
 class MainStack(Stack):
     def __init__(self, scope):
@@ -21,4 +22,6 @@ class MainStack(Stack):
 
 #pipelines = Pipelines(app, "heimdall-pipelines")
 
-app = MainStack(App())
+MainStack(app)
+
+app.synth()
