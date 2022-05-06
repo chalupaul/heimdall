@@ -3,7 +3,7 @@ from typing import Sequence
 from typing_extensions import runtime
 from aws_cdk import (
     # Duration,
-    Stack,
+    NestedStack,
     aws_lambda,
     aws_signer,
     # aws_sqs as sqs,
@@ -12,7 +12,7 @@ from constructs import Construct
 
 from cdk.common import paths
 
-class Api(Stack):
+class Api(NestedStack):
 
     def __init__(self, scope: Construct, construct_id: str, layers: Sequence[aws_lambda.ILayerVersion] = [], **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)

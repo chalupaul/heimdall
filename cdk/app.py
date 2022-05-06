@@ -1,16 +1,25 @@
 #!/usr/bin/env python3
 import os
 
-import aws_cdk
+from aws_cdk import (
+    Stack,
+    App,
+)
 
 from cdk.api import Api
 from cdk.layers import Layers
 
 
-app = aws_cdk.App()
-layers = Layers(app, "Heimdall-LambdaLayers")
-Api(app, "Heimdall-API", layers=layers.api_layers)
+
+
+class MainStack(Stack):
+    def __init__(self, scope):
+        super().__init__(scope, "Heimdall")
+
+        layers = Layers(app, "Heimdall-LambdaLayers")
+        api = Api(app, "Heimdall-API", layers=layers.layers)
 
 #pipelines = Pipelines(app, "heimdall-pipelines")
 
+app = MainStack(App())
 app.synth()

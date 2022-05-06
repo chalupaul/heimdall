@@ -1,8 +1,8 @@
 import os
 from aws_cdk import (
+    NestedStack,
     aws_lambda,
-    RemovalPolicy,
-    Stack
+    RemovalPolicy
 )
 from typing import Sequence
 
@@ -10,7 +10,7 @@ from constructs import Construct
 
 from cdk.common import paths
 
-class Layers(Stack):
+class Layers(NestedStack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
@@ -19,4 +19,5 @@ class Layers(Stack):
             code=aws_lambda.Code.from_asset(paths.layer_dir),
             compatible_runtimes=[aws_lambda.Runtime.PYTHON_3_9],
         )
-        self.api_layers: Sequence[aws_lambda.ILayerVersion] = [api_layer]
+
+        self.layers: Sequence[aws_lambda.ILayerVersion] = [api_layer]
