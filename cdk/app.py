@@ -22,4 +22,3 @@ class MainStack(Stack):
 #pipelines = Pipelines(app, "heimdall-pipelines")
 
 app = MainStack(App())
-app.synth()
