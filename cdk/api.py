@@ -36,7 +36,10 @@ class Api(NestedStack):
         #encryption_config = aws_lambda.e
         env_vars = {
            "LOG_LEVEL": "INFO",
-           "POWERTOOLS_SERVICE_NAME": "heimdall-api"
+           "POWERTOOLS_SERVICE_NAME": "heimdall-api",
+           "POWERTOOLS_LOGGER_SAMPLE_RATE": 0.1,
+           "POWERTOOLS_LOGGER_LOG_EVENT": True,
+           "POWERTOOLS_METRICS_NAMESPACE": "heimdall-api",
         }
 
         api_root = aws_lambda.Function(
@@ -48,5 +51,6 @@ class Api(NestedStack):
             layers=layers,
             code_signing_config=code_signing_config,
             log_retention=aws_logs.RetentionDays.ONE_MONTH,
+            tracing=aws_lambda.Tracing.ACTIVE,
             environment=env_vars
         )
