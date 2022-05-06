@@ -6,6 +6,8 @@ from aws_cdk import (
     NestedStack,
     aws_lambda,
     aws_signer,
+    aws_logs,
+    aws_kms
     # aws_sqs as sqs,
 )
 from constructs import Construct
@@ -31,6 +33,11 @@ class Api(NestedStack):
             self, "HeimdallCSC", signing_profiles=[signer_profile]
         )
 
+        #encryption_config = aws_lambda.e
+        env_vars = {
+           "foo": "bar"
+        }
+
         api_root = aws_lambda.Function(
             self,
             "api root",
@@ -39,4 +46,6 @@ class Api(NestedStack):
             handler="app.handler",
             layers=layers,
             code_signing_config=code_signing_config,
+            log_retention=aws_logs.RetentionDays.ONE_MONTH,
+            environment=env_vars
         )
