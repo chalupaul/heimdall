@@ -8,6 +8,7 @@ authors = ["chalupaul <me@chalupaul.com>"]
 python = "^3.9"
 fastapi = "^0.75.1"
 mangum = "^0.14.1"
+aws-lambda-powertools = "^1.25.10"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
